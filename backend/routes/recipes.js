@@ -12,23 +12,23 @@ router.route('/add').post((req, res) => {
     const recipeName = req.body.name;
     const ingredients = req.body.ingredients;
 
-    const newRecipe = new Recipe({recipeName});
-
+    const newRecipe = new Recipe({name: recipeName});
+    console.log(ingredients);
     for(let i = 0; i < ingredients.length; i++){
         let ingredient = ingredients[i];
-        const name = ingredients['name'];
-        const amount = ingredients['amount'];
-        const recipe_id = ingredients['recipe_id']; 
+        const name = ingredient['name'];
+        const amount = ingredient['amount'];
+        const recipe_id = newRecipe._id; 
         const newIngredient = new Ingredient({name, amount, recipe_id});
 
-        newIngredient.save()
-        .then(() => res.json('Ingredient added!'))
-        .catch((err) => res.status(400).json('Error: ' + err));
+        newIngredient.save();
+        // .then(() => res.json('Ingredient added!'))
+        // .catch(err => res.status(400).json('Error: ' + err));
     }
     
     newRecipe.save()
         .then(() => res.json('Recipe added!'))
-        .catch((err) => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
 // get individual recipe's ingredient list
@@ -45,9 +45,7 @@ router.route('/:id').delete((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 
     // delete ingredients associated with recipe
-    Ingredient.deleteMany({recipe_id: req.params.id})
-        .then(() => res.json('Associated ingredients deleted!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+    Ingredient.deleteMany({recipe_id: req.params.id});
 });
 
 // update single recipe

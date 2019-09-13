@@ -19,9 +19,13 @@ connection.once('open', () => {
 
 const usersRouter = require('./routes/users');
 const ingredientsRouter = require('./routes/ingredients');
+const recipesRouter = require('./routes/recipes');
+const pantryRouter = require('./routes/pantry');
 
 app.use('/users', usersRouter);
 app.use('/ingredients', ingredientsRouter);
+app.use('/recipes', recipesRouter);
+app.use('/pantry', pantryRouter);
 
 
 app.listen(port, () => {

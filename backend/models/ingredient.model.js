@@ -13,7 +13,7 @@ const ingredientSchema = new Schema({
         required: true
     },
     recipe_id: {
-        type: String,
+        type: ObjectId,
         required: true
     }
 });
