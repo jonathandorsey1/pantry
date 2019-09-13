@@ -10,8 +10,9 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
     const name = req.body.name;
     const amount = req.body.amount;
+    const recipe_id = req.body.recipe_id; 
 
-    const newIngredient = new Ingredient({name, amount});
+    const newIngredient = new Ingredient({name, amount, recipe_id});
     
     newIngredient.save()
         .then(() => res.json('Ingredient added!'))
