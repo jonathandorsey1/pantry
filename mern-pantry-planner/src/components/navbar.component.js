@@ -7,19 +7,19 @@ export default class Navbar extends Component {
         return (
             <nav className='navbar navbar-dark bg-dark navbar-expand-lg'>
                 <Link to='/' className='navbar-brand'>PantryPlanner</Link>
-                <div className='collapse navbar-collapse'>
+                <div className='collpase navbar-collapse'>
                     <ul className='navbar-nav mr-auto'>
                         <li className='navbar-item'>
                         <Link to='/' className='nav-link'>Homepage</Link>
                         </li>
                         <li className='navbar-item'>
-                            <Link exact to='/recipes' className='nav-link'>Recipes</Link>
+                            <Link to='/recipes' className='nav-link'>Recipes</Link>
                         </li>
                         <li className='navbar-item'>
                             <Link to='/pantry/:id' className='nav-link'>My Pantry</Link>
                         </li>
                         <li className='navbar-item'>
-                            <Link exact to='/recipes/create' className='nav-link'>Create a Recipe</Link>
+                            <Link to='/recipes/create' className='nav-link'>Create a Recipe</Link>
                         </li>
                         <li className='navbar-item'>
                             <Link to='/user' className='nav-link'>Create Account</Link>
