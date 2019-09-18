@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import IngredientForm from './ingredient-form.component';
+import axios from 'axios';
 
 export default class CreateRecipe extends Component {
 
@@ -59,15 +60,24 @@ export default class CreateRecipe extends Component {
     onSubmit(e) {
         e.preventDefault();
 
+        let ingredients = [];
+        for (let i = 0; i < this.state.ingredients; i++) {
+            let ingredient = this.state.ingredients[i];
+            if (ingredient.name !== '') {
+                ingredients.push(ingredient);
+            }
+        }
+
         const recipe = {
             name: this.state.name,
-            ingredients: this.state.ingredients
+            ingredients: ingredients
         };
 
-        console.log('here!');
         console.log(recipe);
+        axios.post('http://localhost:5000/recipes/add', recipe)
+            .then(res => console.log(res.data));
 
-        //window.location = '/recipes';
+        window.location = '/recipes';
     }
 
     render() {
@@ -90,7 +100,6 @@ export default class CreateRecipe extends Component {
                             <label>Recipe Name</label>
                             <input type='text' 
                                    className='form-control' 
-                                   id='formGroupRecipeInput' 
                                    placeholder='Name'
                                    onChange={this.onChangeName}/>
                         </div>
@@ -98,7 +107,6 @@ export default class CreateRecipe extends Component {
                             <label>Number of Ingredients</label>
                             <input type='number' 
                                    className='form-control' 
-                                   id='formGroupNumIngredientsInput' 
                                    placeholder=''
                                    onChange={this.onChangeNumIngredients}/>
                         </div>

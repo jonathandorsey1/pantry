@@ -8,6 +8,7 @@ export default class IngredientForm extends Component {
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeAmount = this.onChangeAmount.bind(this);
 
+
     }
 
     onChangeName(e) {
@@ -21,9 +22,17 @@ export default class IngredientForm extends Component {
     render() {
         const name = this.props.name;
         const amount = this.props.amount;
+
+        let ingredientLabel = null;
+        let amountLabel = null;
+        if (this.props.index === 0){
+            ingredientLabel = <label>Ingredients</label>;
+            amountLabel = <label>Amount (in grams)</label>;
+        }
         return (
             <div className="form-row">
                 <div className="form-group col-auto">
+                    <div>{ingredientLabel}</div>
                     <input type="text" 
                             value={name}
                             className="form-control" 
@@ -31,10 +40,10 @@ export default class IngredientForm extends Component {
                             onChange={this.onChangeName}/>
                 </div>
                 <div className="form-group col-auto">
+                    <div>{amountLabel}</div>
                     <input type="number" 
                            value={amount}
                            className="form-control" 
-                           placeholder="Amount (in grams)"
                            onChange={this.onChangeAmount}/>
                 </div>
             </div>

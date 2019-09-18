@@ -17,7 +17,7 @@ function App() {
         <br />
         <Route path='/' exact component={HomePage}/>
         <Route path='/recipes' exact component={RecipeList}/>
-        <Route path='/pantry/:id' component={PantryList}/>
+        <Route path='/pantry' component={PantryList}/>
         <Route path='/recipes/create' exact component={CreateRecipe}/>
         <Route path='/user' component={CreateUser}/>
       </div>
