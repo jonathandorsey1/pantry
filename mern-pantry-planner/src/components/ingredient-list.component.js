@@ -11,30 +11,34 @@ export default class IngredientList extends Component {
         };
     }
 
-    componentDidMount() {
-        let username = this.props.username;
-        axios.get('http://localhost:5000/pantry/' + username)
-            .then(res => {
-                this.setState({
-                    ingredients: res.map(ingredient => {
-                        return {
-                            name: ingredient.name,
-                            amount: ingredient.amount
-                        };
-                    })
+    componentDidUpdate(prevProps) {
+        if (prevProps.username !== this.props.username ||
+            prevProps.updateFlag !== this.props.updateFlag){
+            let username = this.props.username;
+            console.log('here');
+            axios.get('http://localhost:5000/pantry/' + username)
+                .then(res => {
+                    this.setState({
+                        ingredients: res.data.map(ingredient => {
+                            return {
+                                name: ingredient.name,
+                                amount: ingredient.amount
+                            };
+                        })
+                    });
                 });
-            });
-        
-        console.log(this.state.ingredients);
+            
+            console.log(this.state.ingredients);
+        }
     }
 
     render() {
         let rows = [];
-        for (let i = 0; i < this.state.ingredients.length; i++) {
-            let ingredient = this.state.ingredients[i];
+        for (let i = 1; i <= this.state.ingredients.length; i++) {
+            let ingredient = this.state.ingredients[i - 1];
             rows.push(
-            <tr>
-                <th scope='row'>1</th>
+            <tr key={i}>
+                <th scope='row'>{i}</th>
                 <td>{ingredient['name']}</td>
                 <td>{ingredient['amount']}</td>
             </tr>);

@@ -8,8 +8,8 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const name = req.body.name;
-    const amount = req.body.amount;
+    const name = req.body.name.toLowerCase();
+    const amount = req.body.amount.toLowerCase();
     const recipe_id = req.body.recipe_id; 
 
     const newIngredient = new Ingredient({name, amount, recipe_id});

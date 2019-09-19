@@ -2,7 +2,7 @@ const router = require('express').Router();
 let Pantry = require('../models/pantry.model');
 
 router.route('/:id').get((req, res) => {
-    Pantry.find({username: id, amount: {$gt: 0}})
+    Pantry.find({username: req.params.id, amount: {$gt: 0}})
         .then(pantry => res.json(pantry))
         .catch(err => res.status(400).json('Error ' + err));
 });
@@ -14,8 +14,8 @@ router.route('/:id').get((req, res) => {
 
 router.route('/:id/add').post((req, res) => {
 
-    const username = id;
-    const name = req.body.name;
+    const username = req.params.id.toLowerCase();
+    const name = req.body.name.toLowerCase();
     const amount = req.body.amount;
 
     const newPantry = new Pantry({username, name, amount});

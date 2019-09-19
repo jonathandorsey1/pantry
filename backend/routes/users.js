@@ -8,8 +8,8 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const username = req.body.username.toLowerCase();
+    const password = req.body.password.toLowerCase();
 
     const newUser = new User({username, password});
     newUser.save()
